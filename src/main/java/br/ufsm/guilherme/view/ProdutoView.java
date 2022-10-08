@@ -25,157 +25,190 @@ public class ProdutoView extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - unknown
     private void initComponents() {
-        jLabel1 = new JLabel();
-        jLabel2 = new JLabel();
-        jLabel3 = new JLabel();
-        txtFieldDescricao = new JTextField();
-        txtFieldQuantidade = new JTextField();
-        jLabel4 = new JLabel();
-        txtFieldPreco = new JTextField();
-        btnCadastro = new JButton();
-        btnAtualizar = new JButton();
-        btnExcluir = new JButton();
-        jScrollPane1 = new JScrollPane();
-        tabelaProduto = new JTable();
 
-        //======== this ========
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        var contentPane = getContentPane();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtFieldDescricao = new javax.swing.JTextField();
+        txtFieldQuantidade = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtFieldPreco = new javax.swing.JTextField();
+        btnCadastro = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaProduto = new javax.swing.JTable();
+        btnBuscar = new javax.swing.JButton();
+        txtFieldBuscar = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
-        //---- jLabel1 ----
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
         jLabel1.setText("Cadastro de Produtos");
 
-        //---- jLabel2 ----
-        jLabel2.setText("Descri\u00e7\u00e3o:");
+        jLabel2.setText("Descrição:");
 
-        //---- jLabel3 ----
         jLabel3.setText("Quantidade:");
 
-        //---- txtFieldDescricao ----
-        txtFieldDescricao.addActionListener(e -> txtFieldDescricaoActionPerformed(e));
+        txtFieldDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFieldDescricaoActionPerformed(evt);
+            }
+        });
 
-        //---- jLabel4 ----
-        jLabel4.setText("Pre\u00e7o:");
+        jLabel4.setText("Preço:");
 
-        //---- btnCadastro ----
         btnCadastro.setText("Cadastrar");
-        btnCadastro.addActionListener(e -> btnCadastroActionPerformed(e));
+        btnCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastroActionPerformed(evt);
+            }
+        });
 
-        //---- btnAtualizar ----
         btnAtualizar.setText("Atualizar");
-        btnAtualizar.addActionListener(e -> btnAtualizarActionPerformed(e));
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
 
-        //---- btnExcluir ----
         btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(e -> btnExcluirActionPerformed(e));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
-        //======== jScrollPane1 ========
-        {
+        tabelaProduto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-            //---- tabelaProduto ----
-            tabelaProduto.setModel(new DefaultTableModel(
-                new Object[][] {
-                },
-                new String[] {
-                    "Id", "Descri\u00e7\u00e3o", "Quantidade", "Pre\u00e7o"
-                }
-            ) {
-                Class<?>[] columnTypes = new Class<?>[] {
-                    Integer.class, String.class, Integer.class, Double.class
-                };
-                boolean[] columnEditable = new boolean[] {
-                    false, false, false, false
-                };
-                @Override
-                public Class<?> getColumnClass(int columnIndex) {
-                    return columnTypes[columnIndex];
-                }
-                @Override
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return columnEditable[columnIndex];
-                }
-            });
-            jScrollPane1.setViewportView(tabelaProduto);
-        }
+            },
+            new String [] {
+                "Id", "Descrição", "Quantidade", "Preço"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        GroupLayout contentPaneLayout = new GroupLayout(contentPane);
-        contentPane.setLayout(contentPaneLayout);
-        contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGroup(contentPaneLayout.createParallelGroup()
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(16, 16, 16)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addComponent(btnCadastro)
-                                    .addGap(18, 18, 18)
-                                    .addGroup(contentPaneLayout.createParallelGroup()
-                                        .addComponent(jLabel1)
-                                        .addGroup(contentPaneLayout.createSequentialGroup()
-                                            .addGap(8, 8, 8)
-                                            .addComponent(btnAtualizar)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(btnExcluir)))
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addGroup(contentPaneLayout.createSequentialGroup()
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaProdutoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelaProduto);
+
+        btnBuscar.setText("Buscar");
+
+        jLabel5.setText("Buscar:");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(111, 111, 111)
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtFieldDescricao, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(68, 68, 68)
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtFieldQuantidade, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(34, 34, 34)
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtFieldPreco, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(26, 26, 26))))
-                        .addComponent(jScrollPane1, GroupLayout.Alignment.TRAILING))
-                    .addContainerGap())
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFieldBuscar)
+                                    .addComponent(txtFieldDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(68, 68, 68)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addComponent(btnBuscar)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(btnCadastro)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnAtualizar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnExcluir)))))
+                        .addGap(26, 26, 26)))
+                .addContainerGap())
         );
-        contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(28, 28, 28)
-                    .addComponent(jLabel1)
-                    .addGap(31, 31, 31)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)
-                        .addComponent(txtFieldDescricao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtFieldQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)
-                        .addComponent(txtFieldPreco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGap(30, 30, 30)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnCadastro)
-                        .addComponent(btnAtualizar)
-                        .addComponent(btnExcluir))
-                    .addGap(27, 27, 27)
-                    .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(48, Short.MAX_VALUE))
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(txtFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadastro)
+                    .addComponent(btnAtualizar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnBuscar)
+                    .addComponent(txtFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(70, Short.MAX_VALUE))
         );
+
         pack();
-        setLocationRelativeTo(getOwner());
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFieldDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldDescricaoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtFieldDescricaoActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        //FIXME: id do produto está mockado
-        produtoController.update(1, txtFieldDescricao.getText(),
+
+        if(this.tabelaProduto.getSelectedRow() != -1){
+            produtoController.update(
+                (int) this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0), 
+                txtFieldDescricao.getText(),
                 Integer.parseInt(txtFieldQuantidade.getText()),
-                Double.parseDouble(txtFieldPreco.getText()));
+                Double.parseDouble(txtFieldPreco.getText())
+            );
+        }
+        
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        //FIXME: id do produto está mockado
-        produtoController.delete(1);
+       if(this.tabelaProduto.getSelectedRow() != -1){
+            produtoController.delete((int) this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0));
+        }
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
@@ -187,6 +220,15 @@ public class ProdutoView extends javax.swing.JFrame {
         
         limparCampos();
     }//GEN-LAST:event_btnCadastroActionPerformed
+
+    private void tabelaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProdutoMouseClicked
+        if(this.tabelaProduto.getSelectedRow() != -1) {
+            txtFieldDescricao.setText(this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0).toString());
+            txtFieldDescricao.setText(this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0).toString());
+            txtFieldDescricao.setText(this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0).toString());
+            txtFieldDescricao.setText(this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0).toString());
+        }
+    }//GEN-LAST:event_tabelaProdutoMouseClicked
 
     public void limparCampos() {
         txtFieldDescricao.setText("");
@@ -232,18 +274,20 @@ public class ProdutoView extends javax.swing.JFrame {
     }
 //System.out.println(96478057);
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
-    private JLabel jLabel1;
-    private JLabel jLabel2;
-    private JLabel jLabel3;
-    private JTextField txtFieldDescricao;
-    private JTextField txtFieldQuantidade;
-    private JLabel jLabel4;
-    private JTextField txtFieldPreco;
-    private JButton btnCadastro;
-    private JButton btnAtualizar;
-    private JButton btnExcluir;
-    private JScrollPane jScrollPane1;
-    private JTable tabelaProduto;
+    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCadastro;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabelaProduto;
+    private javax.swing.JTextField txtFieldBuscar;
+    private javax.swing.JTextField txtFieldDescricao;
+    private javax.swing.JTextField txtFieldPreco;
+    private javax.swing.JTextField txtFieldQuantidade;
     // End of variables declaration//GEN-END:variables
 }
