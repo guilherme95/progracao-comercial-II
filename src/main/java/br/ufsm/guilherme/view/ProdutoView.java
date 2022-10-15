@@ -1,22 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package br.ufsm.guilherme.view;
 
-import javax.swing.*;
-import javax.swing.GroupLayout;
-import javax.swing.LayoutStyle;
+import br.ufsm.guilherme.controller.CategoriaController;
 import br.ufsm.guilherme.controller.ProdutoController;
+import br.ufsm.guilherme.model.bean.Categoria;
 import br.ufsm.guilherme.model.bean.Produto;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 public class ProdutoView extends javax.swing.JFrame {
 
     ProdutoController produtoController = new ProdutoController();
+    CategoriaController categoriaController = new CategoriaController();
   
     public ProdutoView() {
         initComponents();
@@ -42,8 +38,15 @@ public class ProdutoView extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         txtFieldBuscar = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        comboBoxCategoria = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Cadastro de Produtos");
 
@@ -85,14 +88,14 @@ public class ProdutoView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Descrição", "Quantidade", "Preço"
+                "Id", "Descrição", "Quantidade", "Preço", "Categoria"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -114,6 +117,14 @@ public class ProdutoView extends javax.swing.JFrame {
 
         jLabel5.setText("Buscar:");
 
+        comboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxCategoriaActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Categoria:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,16 +140,24 @@ public class ProdutoView extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtFieldBuscar)
-                                    .addComponent(txtFieldDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(comboBoxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtFieldDescricao))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(btnCadastro)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(btnAtualizar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnExcluir)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(68, 68, 68)
+                                        .addGap(32, 32, 32)
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,14 +166,12 @@ public class ProdutoView extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(23, 23, 23)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                                         .addComponent(btnBuscar)
-                                        .addGap(29, 29, 29)
-                                        .addComponent(btnCadastro)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnAtualizar)
                                         .addGap(18, 18, 18)
-                                        .addComponent(btnExcluir)))))
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(26, 26, 26)))
                 .addContainerGap())
         );
@@ -173,67 +190,152 @@ public class ProdutoView extends javax.swing.JFrame {
                     .addComponent(txtFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(btnBuscar)
                     .addComponent(btnCadastro)
                     .addComponent(btnAtualizar)
-                    .addComponent(btnExcluir)
-                    .addComponent(btnBuscar)
-                    .addComponent(txtFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(27, 27, 27)
+                    .addComponent(btnExcluir))
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void getListaProduto() {
+        DefaultTableModel modeloTabelaProduto = (DefaultTableModel) this.tabelaProduto.getModel();
+        modeloTabelaProduto.setNumRows(0);
+        
+        for (Produto produto : produtoController.read()) {
+            modeloTabelaProduto.addRow(
+                new Object[]{
+                    produto.getIdProduto(),
+                    produto.getDescricao(),
+                    produto.getQuantidade(),
+                    produto.getPreco(), 
+                    produto.getCategoria().getDescricao()
+                }
+            );
+        }
+    }
+
+    private void popularComboBoxCategoria() {
+        for (Categoria categoria : categoriaController.read()) {
+            this.comboBoxCategoria.addItem(categoria);
+        }
+    }
+    
     private void txtFieldDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldDescricaoActionPerformed
         
     }//GEN-LAST:event_txtFieldDescricaoActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
 
-        if(this.tabelaProduto.getSelectedRow() != -1){
-            produtoController.update(
-                (int) this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0), 
-                txtFieldDescricao.getText(),
-                Integer.parseInt(txtFieldQuantidade.getText()),
-                Double.parseDouble(txtFieldPreco.getText())
-            );
-        }
-        
+        if(
+            comboBoxCategoria.getSelectedItem() != null 
+            && !txtFieldDescricao.getText().equals("")
+            && !txtFieldPreco.getText().equals("")
+            && !txtFieldQuantidade.getText().equals("")
+        ) {
+            
+            Categoria categoria = (Categoria) comboBoxCategoria.getSelectedItem();
+            
+            if(
+                produtoController.update(
+                    (int) this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0), 
+                    txtFieldDescricao.getText(),
+                    Integer.parseInt(txtFieldQuantidade.getText()),
+                    Double.parseDouble(txtFieldPreco.getText()),
+                    categoria
+                )
+            ){
+                JOptionPane.showMessageDialog(this, "Produto atualizado com sucesso!", "Info", JOptionPane.INFORMATION_MESSAGE);            
+                this.limparCampos();
+                this.getListaProduto();  
+            } else {
+                JOptionPane.showMessageDialog(this, "Não foi possível atualizar produto", "Erro", JOptionPane.ERROR_MESSAGE);
+            }            
+        }      
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-       if(this.tabelaProduto.getSelectedRow() != -1){
-            produtoController.delete((int) this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0));
+       if(this.tabelaProduto.getSelectedRow() != -1) {
+            if(
+                produtoController.delete((int) this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0))
+            ) {
+                JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!", "Info", JOptionPane.INFORMATION_MESSAGE);            
+            }else{
+                JOptionPane.showMessageDialog(this, "Não foi possível excluir produto!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        
+       this.limparCampos();
+       this.getListaProduto();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         
-        produtoController.create(
-            txtFieldDescricao.getText(),
-            Integer.parseInt(txtFieldQuantidade.getText()),
-            Double.parseDouble(txtFieldPreco.getText()));
+        if(
+            comboBoxCategoria.getSelectedItem() != null 
+            && !txtFieldDescricao.getText().equals("")
+            && !txtFieldPreco.getText().equals("")
+            && !txtFieldQuantidade.getText().equals("")
+        ) {
         
-        limparCampos();
+            Categoria categoria = (Categoria) comboBoxCategoria.getSelectedItem();
+            
+            if(
+                produtoController.create(
+                    txtFieldDescricao.getText(),
+                    Integer.parseInt(txtFieldQuantidade.getText()),
+                    Double.parseDouble(txtFieldPreco.getText()), 
+                    categoria
+                )
+            ){
+                JOptionPane.showMessageDialog(this, "Produto salvo com sucesso!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                this.limparCampos();
+                this.getListaProduto();
+            }else {
+                JOptionPane.showMessageDialog(this, "Não foi possível salvar produto", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void tabelaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProdutoMouseClicked
         if(this.tabelaProduto.getSelectedRow() != -1) {
-            txtFieldDescricao.setText(this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0).toString());
-            txtFieldDescricao.setText(this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0).toString());
-            txtFieldDescricao.setText(this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0).toString());
-            txtFieldDescricao.setText(this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 0).toString());
+            txtFieldDescricao.setText(this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 1).toString());
+            txtFieldQuantidade.setText(this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 2).toString());
+            txtFieldPreco.setText(this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 3).toString());
+            String categoriaSelecionada = (String) this.tabelaProduto.getValueAt(this.tabelaProduto.getSelectedRow(), 4);
+            for(int i=0; i<this.comboBoxCategoria.getItemCount(); i++) {
+                Categoria categoria = (Categoria) this.comboBoxCategoria.getItemAt(i);
+                if(categoria.getDescricao().equals(categoriaSelecionada)){
+                    this.comboBoxCategoria.setSelectedIndex(i);
+                }
+            }
         }
     }//GEN-LAST:event_tabelaProdutoMouseClicked
+
+    private void comboBoxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCategoriaActionPerformed
+
+    }//GEN-LAST:event_comboBoxCategoriaActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.getListaProduto();
+        this.popularComboBoxCategoria();
+    }//GEN-LAST:event_formWindowOpened
 
     public void limparCampos() {
         txtFieldDescricao.setText("");
         txtFieldQuantidade.setText("");
         txtFieldPreco.setText("");
+        
+        comboBoxCategoria.setSelectedIndex(-1);
         
         txtFieldDescricao.requestFocus();
     }
@@ -278,11 +380,13 @@ public class ProdutoView extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastro;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JComboBox<Object> comboBoxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaProduto;
     private javax.swing.JTextField txtFieldBuscar;

@@ -1,6 +1,7 @@
 package br.ufsm.guilherme.model.dao;
 
 import br.ufsm.guilherme.connection.ConnectionFactory;
+import br.ufsm.guilherme.model.bean.Categoria;
 import br.ufsm.guilherme.model.bean.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,33 +9,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 
 public class ProdutoDAO {
     
-    public void create(Produto produto) {
+    public boolean create(Produto produto) {
         
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
         try {
-            stmt = connection.prepareStatement("INSERT INTO produto(descricao, quantidade, preco) VALUES (?, ?, ?)");
+            stmt = connection.prepareStatement("INSERT INTO produto(descricao, quantidade, preco, id_categoria) VALUES (?, ?, ?, ?)");
             stmt.setString(1, produto.getDescricao());
             stmt.setInt(2, produto.getQuantidade());
             stmt.setDouble(3, produto.getPreco());
+            stmt.setInt(4, produto.getCategoria().getIdCategoria());
             
             stmt.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+            return true;
             
         } catch(SQLException ex) {
         
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro ao tentar salvar produto. Erro: " + ex);
+            return false;
             
         }finally {
             ConnectionFactory.closeConnection(connection, stmt);
@@ -48,59 +48,76 @@ public class ProdutoDAO {
         Collection<Produto> produtos = new ArrayList<>();
 
         try {
-            stmt = connection.prepareStatement("SELECT * FROM produto ORDER BY descricao ASC");
+            stmt = connection.prepareStatement(
+                    "SELECT " +
+                        "p.id AS id_produto," +
+                        "p.descricao AS ds_produto," +
+                        "p.quantidade," +
+                        "p.preco," +
+                        "c.id AS id_categoria," +
+                        "c.descricao AS ds_categoria " +
+                    "FROM " +
+                        "produto p " +
+                    "INNER JOIN categoria c ON p.id_categoria = c.id");
 
             ResultSet resultSet = stmt.executeQuery();
 
             while(resultSet.next()){
                 Produto produto = new Produto();
 
-                produto.setIdProduto(resultSet.getInt("id"));
-                produto.setDescricao(resultSet.getString("descricao"));
+                produto.setIdProduto(resultSet.getInt("id_produto"));
+                produto.setDescricao(resultSet.getString("ds_produto"));
                 produto.setQuantidade(resultSet.getInt("quantidade"));
                 produto.setPreco(resultSet.getDouble("preco"));
 
+                Categoria categoria = new Categoria();
+                categoria.setIdCategoria(resultSet.getInt("id_categoria"));
+                categoria.setDescricao(resultSet.getString("ds_categoria"));
+                
+                produto.setCategoria(categoria);
+                
                 produtos.add(produto);
             }
 
         } catch(SQLException ex) {
 
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro ao tentar listar produtos. Erro: " + ex);
 
         } finally {
             ConnectionFactory.closeConnection(connection, stmt);
         }
+        
         return produtos;
     }
 
-    public void update(Produto produto) {
+    public boolean update(Produto produto) {
 
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
-            stmt = connection.prepareStatement("UPDATE produto SET descricao = ?, quantidade = ?, preco = ? WHERE id = ?");
+            stmt = connection.prepareStatement("UPDATE produto SET descricao = ?, quantidade = ?, preco = ?, id_categoria = ? WHERE id = ?");
             stmt.setString(1, produto.getDescricao());
             stmt.setInt(2, produto.getQuantidade());
             stmt.setDouble(3, produto.getPreco());
-            stmt.setDouble(4, produto.getIdProduto());
-
+            stmt.setInt(4, produto.getCategoria().getIdCategoria());
+            stmt.setDouble(5, produto.getIdProduto());
+            
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso");
-
+            return true;
+            
         } catch(SQLException ex) {
 
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro ao salvar produto. Erro: " + ex);
+            return false;
 
         }finally {
             ConnectionFactory.closeConnection(connection, stmt);
         }
     }
 
-    public void delete(Integer id) {
+    public boolean delete(Integer id) {
 
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -111,13 +128,10 @@ public class ProdutoDAO {
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Produto excluído com sucesso");
-
+            return true;
         } catch(SQLException ex) {
-
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
-
+            System.out.println("Não foi possível excluir produto. Erro: " + ex);
+            return false;
         }finally {
             ConnectionFactory.closeConnection(connection, stmt);
         }

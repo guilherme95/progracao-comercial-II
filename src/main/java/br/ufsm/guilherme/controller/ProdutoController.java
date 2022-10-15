@@ -1,5 +1,6 @@
 package br.ufsm.guilherme.controller;
 
+import br.ufsm.guilherme.model.bean.Categoria;
 import br.ufsm.guilherme.model.bean.Produto;
 import br.ufsm.guilherme.model.dao.ProdutoDAO;
 
@@ -7,36 +8,36 @@ import java.util.Collection;
 
 public class ProdutoController {
     
-    public void create(String descricao, Integer quantidade, Double preco){
+    public boolean create(String descricao, Integer quantidade, Double preco, Categoria categoria){
         
         Produto produto = new Produto();
-        ProdutoDAO produtoDAO = new ProdutoDAO();
         
         produto.setDescricao(descricao);
         produto.setQuantidade(quantidade);
         produto.setPreco(preco);
+        produto.setCategoria(categoria);
         
-        produtoDAO.create(produto);
+        return new ProdutoDAO().create(produto);
     }
 
     public Collection<Produto> read() {
         return new ProdutoDAO().read();
     }
 
-    public void update(Integer id, String descricao, Integer quantidade, Double preco){
+    public boolean update(Integer id, String descricao, Integer quantidade, Double preco, Categoria categoria){
 
         Produto produto = new Produto();
-        ProdutoDAO produtoDAO = new ProdutoDAO();
 
         produto.setIdProduto(id);
         produto.setDescricao(descricao);
         produto.setQuantidade(quantidade);
         produto.setPreco(preco);
-
-        produtoDAO.update(produto);
+        produto.setCategoria(categoria);
+        
+        return new ProdutoDAO().update(produto);
     }
 
-    public void delete(Integer id) {
-        new ProdutoDAO().delete(id);
+    public boolean delete(Integer id) {
+        return new ProdutoDAO().delete(id);
     }
 }

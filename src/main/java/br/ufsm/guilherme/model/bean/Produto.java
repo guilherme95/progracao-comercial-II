@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.ufsm.guilherme.model.bean;
 
 public class Produto {
@@ -10,6 +6,7 @@ public class Produto {
     private String descricao;
     private Integer quantidade;
     private Double preco;
+    private Categoria categoria;
 
     public Produto() {
     }
@@ -45,5 +42,15 @@ public class Produto {
     public void setPreco(Double preco) {
         this.preco = preco;
     }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+    
+    
     
 }
