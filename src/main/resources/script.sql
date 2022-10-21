@@ -13,6 +13,12 @@ CREATE TABLE produto(
     FOREIGN KEY (id_categoria) REFERENCES categoria(id) ON DELETE CASCADE
 );
 
+CREATE TABLE usuario(
+    id serial NOT NULL PRIMARY KEY,
+    usuario varchar(100),
+    senha varchar(250)
+)
+
 SELECT
     p.id AS id_produto,
     p.descricao AS ds_produto, 
