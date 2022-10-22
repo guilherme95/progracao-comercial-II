@@ -134,4 +134,84 @@ public class ProdutoDAO {
         }
 
     }
+    
+    public Collection<Produto> listarProdutoPorDescricao(String descricao) {
+        
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet resultSet = null;
+        
+        Collection<Produto> produtos = new ArrayList();
+        
+        try{
+            
+            stmt = connection.prepareStatement("SELECT * FROM view_produtocategoria WHERE ds_produto LIKE ? ORDER BY id_produto");
+            stmt.setString(1, "%"+descricao+"%");
+            resultSet = stmt.executeQuery();
+            
+            while(resultSet.next()){
+                Produto produto = new Produto();
+
+                produto.setIdProduto(resultSet.getInt("id_produto"));
+                produto.setDescricao(resultSet.getString("ds_produto"));
+                produto.setQuantidade(resultSet.getInt("quantidade"));
+                produto.setPreco(resultSet.getDouble("preco"));
+
+                Categoria categoria = new Categoria();
+                categoria.setIdCategoria(resultSet.getInt("id_categoria"));
+                categoria.setDescricao(resultSet.getString("ds_categoria"));
+                
+                produto.setCategoria(categoria);
+                
+                produtos.add(produto);
+            }
+            
+        }catch(SQLException ex) {
+            System.out.println("Não foi possível realizar a busca por produto");
+        }finally{
+            ConnectionFactory.closeConnection(connection, stmt, resultSet);
+        }
+        
+        return produtos;
+    }
+    
+    public Collection<Produto> listarCategoriaPorDescricao(String descricao) {
+        
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet resultSet = null;
+        
+        Collection<Produto> produtos = new ArrayList();
+        
+        try{
+            
+            stmt = connection.prepareStatement("SELECT * FROM view_produtocategoria WHERE ds_categoria LIKE ? ORDER BY id_categoria");
+            stmt.setString(1, descricao);
+            resultSet = stmt.executeQuery();
+            
+            while(resultSet.next()){
+                Produto produto = new Produto();
+
+                produto.setIdProduto(resultSet.getInt("id_produto"));
+                produto.setDescricao(resultSet.getString("ds_produto"));
+                produto.setQuantidade(resultSet.getInt("quantidade"));
+                produto.setPreco(resultSet.getDouble("preco"));
+
+                Categoria categoria = new Categoria();
+                categoria.setIdCategoria(resultSet.getInt("id_categoria"));
+                categoria.setDescricao(resultSet.getString("ds_categoria"));
+                
+                produto.setCategoria(categoria);
+                
+                produtos.add(produto);
+            }
+            
+        }catch(SQLException ex) {
+            System.out.println("Não foi possível realizar a busca por categoria");
+        }finally{
+            ConnectionFactory.closeConnection(connection, stmt, resultSet);
+        }
+        
+        return produtos;
+    }
 }

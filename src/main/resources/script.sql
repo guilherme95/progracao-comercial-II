@@ -32,7 +32,7 @@ INNER JOIN categoria c ON p.id_categoria = c.id
 
 -- criação da view
 
-CREATE OR REPLACE view_produtocategoria AS 
+CREATE OR REPLACE VIEW view_produtocategoria AS 
 SELECT
     p.id AS id_produto,
     p.descricao AS ds_produto, 
@@ -42,4 +42,4 @@ SELECT
     c.descricao AS ds_categoria
 FROM
     produto p 
-INNER JOIN categoria c ON p.id_categoria = c.id
+INNER JOIN categoria c ON p.id_categoria = c.id;

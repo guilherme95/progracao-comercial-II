@@ -4,7 +4,8 @@ import br.ufsm.guilherme.controller.CategoriaController;
 import br.ufsm.guilherme.controller.ProdutoController;
 import br.ufsm.guilherme.model.bean.Categoria;
 import br.ufsm.guilherme.model.bean.Produto;
-import javax.swing.DefaultComboBoxModel;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +17,8 @@ public class ProdutoView extends javax.swing.JFrame {
   
     public ProdutoView() {
         initComponents();
+        this.btnGroupBusca.add(this.radioBtnCategoria);
+        this.btnGroupBusca.add(this.radioBtnProduto);
         DefaultTableModel modeloTabelaproduto = (DefaultTableModel) tabelaProduto.getModel();
     }
 
@@ -23,6 +26,7 @@ public class ProdutoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupBusca = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -36,10 +40,12 @@ public class ProdutoView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaProduto = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
-        txtFieldBuscar = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         comboBoxCategoria = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        radioBtnProduto = new javax.swing.JRadioButton();
+        radioBtnCategoria = new javax.swing.JRadioButton();
+        txtFieldBusca = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -114,8 +120,11 @@ public class ProdutoView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabelaProduto);
 
         btnBuscar.setText("Buscar");
-
-        jLabel5.setText("Buscar:");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         comboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +134,12 @@ public class ProdutoView extends javax.swing.JFrame {
 
         jLabel6.setText("Categoria:");
 
+        radioBtnProduto.setText("Descrição Produto");
+
+        radioBtnCategoria.setText("Categoria");
+
+        jLabel7.setText("Buscar por:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,46 +148,47 @@ public class ProdutoView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(111, 111, 111)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(111, 111, 111)
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(radioBtnProduto)
+                                .addGap(34, 34, 34)
+                                .addComponent(radioBtnCategoria)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                                .addComponent(txtFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscar)
+                                .addGap(12, 12, 12))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnCadastro)
+                                .addGap(46, 46, 46)
+                                .addComponent(btnAtualizar)
+                                .addGap(62, 62, 62)
+                                .addComponent(btnExcluir)
+                                .addGap(192, 192, 192))
+                            .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(comboBoxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(comboBoxCategoria, 0, 206, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtFieldDescricao))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(btnCadastro)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(btnAtualizar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnExcluir)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(32, 32, 32)
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                                        .addComponent(btnBuscar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(26, 26, 26)))
+                                        .addComponent(txtFieldDescricao)))
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -192,15 +208,20 @@ public class ProdutoView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(btnBuscar)
                     .addComponent(btnCadastro)
                     .addComponent(btnAtualizar)
                     .addComponent(btnExcluir))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscar)
+                    .addComponent(txtFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radioBtnCategoria)
+                    .addComponent(radioBtnProduto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
@@ -330,6 +351,31 @@ public class ProdutoView extends javax.swing.JFrame {
         this.popularComboBoxCategoria();
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        DefaultTableModel modeloTabelaProduto = (DefaultTableModel) this.tabelaProduto.getModel();
+        modeloTabelaProduto.setNumRows(0);
+        
+        Collection<Produto> produtos = new ArrayList();
+        
+        if(this.radioBtnProduto.isSelected()){
+            produtos = produtoController.listarProdutoPorDescricao(this.txtFieldBusca.getText());
+        }else if(this.radioBtnCategoria.isSelected()) {
+            produtos = produtoController.listarCategoriaPorDescricao(this.txtFieldBusca.getText());
+        }
+        
+        for (Produto produto : produtos) {
+            modeloTabelaProduto.addRow(
+                new Object[]{
+                    produto.getIdProduto(),
+                    produto.getDescricao(),
+                    produto.getQuantidade(),
+                    produto.getPreco(), 
+                    produto.getCategoria().getDescricao()
+                }
+            );
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     public void limparCampos() {
         txtFieldDescricao.setText("");
         txtFieldQuantidade.setText("");
@@ -380,16 +426,19 @@ public class ProdutoView extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastro;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.ButtonGroup btnGroupBusca;
     private javax.swing.JComboBox<Object> comboBoxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton radioBtnCategoria;
+    private javax.swing.JRadioButton radioBtnProduto;
     private javax.swing.JTable tabelaProduto;
-    private javax.swing.JTextField txtFieldBuscar;
+    private javax.swing.JTextField txtFieldBusca;
     private javax.swing.JTextField txtFieldDescricao;
     private javax.swing.JTextField txtFieldPreco;
     private javax.swing.JTextField txtFieldQuantidade;

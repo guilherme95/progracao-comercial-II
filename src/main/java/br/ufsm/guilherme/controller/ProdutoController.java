@@ -40,4 +40,12 @@ public class ProdutoController {
     public boolean delete(Integer id) {
         return new ProdutoDAO().delete(id);
     }
+    
+    public Collection<Produto> listarProdutoPorDescricao(String descricao) {
+        return new ProdutoDAO().listarProdutoPorDescricao(descricao);
+    }
+    
+    public Collection<Produto> listarCategoriaPorDescricao(String descricao) {
+        return new ProdutoDAO().listarCategoriaPorDescricao(descricao);
+    }
 }
